@@ -1,0 +1,778 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,2,0,1
+ PRODUCTVERSION 0,2,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "HAL's Lab\0"
+            VALUE "FileDescription", "UnPma Common Archiver\0"
+            VALUE "FileVersion", "0.02\0"
+            VALUE "InternalName", "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2005-2005 HAL ""Minthe"" Pussywillow\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "UnPma32.dll\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "HAL's Lab UnPma32\0"
+            VALUE "ProductVersion", "0.02.0.01\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROGRESS DIALOG DISCARDABLE  0, 0, 191, 71
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "UnPma32.dll"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    PUSHBUTTON      "&Cancel",IDCANCEL,151,49,33,14
+    CONTROL         "Progress1",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,
+                    7,49,136,14
+    LTEXT           "",IDC_ARCHIVE,7,7,177,11
+    LTEXT           "",IDC_FILE,7,20,177,9
+    LTEXT           "",IDC_PROGRESS,7,34,177,9
+END
+
+IDD_CONFIRM DIALOG DISCARDABLE  0, 0, 234, 62
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Confirm Overwriting"
+FONT 9, "MS PGothic"
+BEGIN
+    DEFPUSHBUTTON   "はい(&Y)",IDYES,7,41,50,14
+    PUSHBUTTON      "いいえ(&N)",IDNO,61,41,50,14
+    PUSHBUTTON      "すべてはい(&A)",IDYESTOALL,116,41,50,14
+    PUSHBUTTON      "すべていいえ(&E)",IDNOTOALL,173,41,54,14
+    LTEXT           "",IDC_FILE,7,7,220,32
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 184
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 64
+    END
+
+    IDD_CONFIRM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 227
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// MODULE
+//
+
+IDM_SFX                 MODULE                  "Release/PmaSfx.exe"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_CURSOR              CURSOR  DISCARDABLE     "PMA.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON                ICON    DISCARDABLE     "PMA.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_FONTGOTICK         "ＭＳ ゴシック"
+    STID_FONTPGOTICK        "ＭＳ Ｐゴシック"
+    STID_REG_STANDARD       "(標準)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_CONFDLG1           "ConfDlg1"
+    STID_CONFDLG2           "ConfDlg2"
+    STID_PROGRESSDLG        "ProgressDlg"
+    STID_SIMPLEPROGDLG      "SimpleProgDlg"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_GETFNAMEDLG        "GetFNameDlg32"
+    STID_GETCMTDLG          "GetCmtDlg32"
+    STID_GETWINSFXDLG       "GetWinSFXDlg32"
+    STID_OVERWRITEDLG       "OverwriteDlg"
+    STID_MAKEDIRECTORYDLG   "MakeDirectoryDlg"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_T_PROC         "解凍状況"
+    STID_DLG_P_ARCNAME      "書庫ファイル: "
+    STID_DLG_P_FILENAME     "格納ファイル: "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_P_EXTRACTDIR   "解凍先: "
+    STID_DLG_P_WRITESIZE    "書込サイズ: "
+    STID_DLG_P_CANCEL       "取消(&C)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_P_OK           "了解(&O)"
+    STID_DLG_T_OWDIALOG     "上書確認"
+    STID_DLG_P_OWGROUP      "処理(&P)"
+    STID_DLG_P_OWOVWRITE    "上書き(&W)"
+    STID_DLG_P_OWNOTOW      "上書きしない(&N)"
+    STID_DLG_P_OWALLOW      "全て上書き(&A)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_P_OWALLNOT     "全て無視(&H)"
+    STID_DLG_P_BREAK        "中止(&C)"
+    STID_DLG_T_CHGFNAME     "ファイル名の変更"
+    STID_DLG_P_FNAMETITLE   "ファイル名の入力(&N)"
+    STID_DLG_T_CDDIALOG     "ディレクトリの作成"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_P_CDCREATE     "作成する(&M)"
+    STID_DLG_P_CDNOTCREATE  "作成しない(&N)"
+    STID_DLG_P_CDALLCREATE  "以降全て作成(&A)"
+    STID_DLG_P_CDALLNOT     "全て作成しない(&H)"
+    STID_DLG_T_CMTDIALOG    "コメントの入力"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_T_BPDIALOG     "不正パス確認"
+    STID_DLG_P_BPCHGNAME    "変更して解凍(&C)"
+    STID_DLG_P_BPNOT        "解凍しない(&N)"
+    STID_DLG_P_BPALLCHG     "全て変更(&A)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_T_APDIALOG     "絶対パス確認"
+    STID_DLG_P_APRELATIVE   "相対パスとして扱う(&R)"
+    STID_DLG_P_APABS        "絶対パスとして扱う(&A)"
+    STID_DLG_P_APINVALID    "不正パスとして扱う(&B)"
+    STID_DLG_T_TLDIALOG     "展開確認"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_MES_T_WARNING      "警告"
+    STID_MES_T_ERROR        "エラー"
+    STID_MES_T_PROC         "処理状況"
+    STID_MES_T_COMPRESS     "圧縮状況"
+    STID_MES_P_PROCFILE     "処理ファイル: "
+    STID_MES_P_ADDFILE      "圧縮ファイル: "
+    STID_MES_P_WORKFILE     "作業ファイル: "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_MES_P_FILECOPY     "ファイルの転送: "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_MES_T_DELETE       "ファイル削除"
+    STID_MES_P_DELETE       "'%s' を削除しますか?"
+    STID_MES_P_OVERWRITE    "'%s' はすでに存在しています。\n上書きしますか?"
+    STID_MES_T_ROWRITE      "特殊属性上書き確認"
+    STID_MES_P_ROWRITE      "'%s' [---w] : 特殊属性のファイルです。\n上書きしますか?"
+    STID_MES_P_CRCCHECK     "ファイルのチェック"
+    STID_MES_T_CRCERR       "削除確認"
+    STID_MES_P_CRCERR       "CRCエラーです。\n'%s' は完全ではありません。削除しますか?"
+    STID_MES_T_CRCERR2      "CRCエラー確認"
+    STID_MES_P_CRCERR2      "CRCエラーです。\n'%s' は完全ではありません。"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_MES_T_BADHUF       "ハフマンコード不良警告"
+    STID_MES_P_BADHUF       "[%s]\nハフマンコードが壊れている格納ファイルが存在しますが、\n継続指定となっているので、\n書庫の読み込みを続けます。\n"
+    STID_MES_T_NAMECHANGE   "ファイル名変更確認"
+    STID_MES_P_NAMECHANGE   "ファイル名を変更しますか?"
+    STID_MES_P_SHARE        "[%s]\nファイルへのアクセスが禁止されているので、\nこのファイルについては処理が行われません。"
+    STID_MES_T_MAKEDIR      "ディレクトリの作成"
+    STID_MES_P_MAKEDIR      "[%s]\nディレクトリが存在しません。作成しますか?"
+    STID_MES_T_CONTINUE     "処理続行確認"
+    STID_MES_P_CONTINUE     "処理を続行しますか?"
+    STID_MES_T_BADARC       "ヘッダ不良警告"
+    STID_MES_P_BADARC       "[%s]\nこの書庫はヘッダが壊れていますが、\n継続指定となっているので、\n書庫の読み込みを続けます。\n"
+    STID_MES_T_CONFIRM      "パス名とヘッダが適合しません"
+    STID_MES_P_DICSIZ_WAR   "%dKBの辞書しか確保できませんでした"
+    STID_MES_P_DISKSPACE    "'%s' を解凍するための空きがありません。\n処理を続けますか?"
+    STID_LOG_WAR_EXTDATA    "情報: 最初のヘッダの前に余分なデータがあります。"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_LOG_WAR_SFX        "情報: 自己解凍書庫です。"
+    STID_MES_P_BADPATH      "[%s]\n不正なパスです。変更しますか?"
+    STID_MES_P_ABSPATH      "絶対パスのメンバが存在しますが、\n相対パスとみなして展開しますか?"
+    STID_MES_P_TOOBIG       "'%s' はファイルシステムで扱えるサイズを超えています。\n展開先を変更しますか?"
+    STID_MES_P_EXECUTABLE   "[%s]\n実行可能ファイルです。展開しますか?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_CANTOPEN         ": ファイルが開けません"
+    STID_M_MAKEDIR          ": ディレクトリが作成できません"
+    STID_M_DIFFHOST         ": MS-DOSで作成されたバイナリファイルではありません"
+    STID_M_FEXISTS          ": 同名のファイルがあります"
+    STID_M_FNEW             ": 最新のファイルが存在"
+    STID_M_FOLD             ": 古いファイルが存在"
+    STID_M_FSAME            ": 同じファイルがあります"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_FNOEXIST         ": ファイルが存在しません"
+    STID_M_NOTSPCE          ": ディスクが満杯"
+    STID_M_RDONLY           ": 書き込み禁止"
+    STID_M_SPATTR           ": 特殊な属性のファイル"
+    STID_M_USKIP            ": ユーザによりスキップ"
+    STID_M_WRITEER          ": ファイルに書き込めません"
+    STID_M_DANNAME          ": MS-DOSで扱えない名前のファイルです"
+    STID_M_SHARE            ": アクセスが許可されていません"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_TOOLONG          ": パス名が長すぎます"
+    STID_M_TOOBIG           ": ファイルが大きすぎます"
+    STID_M_UNKNMETH         ": 未対応の圧縮法 '%s'"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_BADPATH          ": 不正なパスです"
+    STID_M_TOO_BIG2         ": ファイルが大きすぎます"
+    STID_M_EXEFILE          ": 実行可能ファイルです"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_ERRORCNT         "%d 個のエラーが発生しました"
+    STID_M_NOSPCL           "解凍のためのディスクの空きが %lu バイト足りません。"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_8005           "Warning(8005): ディスクの空きがありません"
+    STID_ERR_8006           "Warning(8006): 上書きしようとしているファイルはリードオンリーです"
+    STID_ERR_8007           "Warning(8007): ユーザーによって解凍をスキップされました"
+    STID_ERR_8008           "Warning(8008): 格納ファイルがMS-DOSで扱える形式ではありません"
+    STID_ERR_8009           "Warning(8009): 未対応の圧縮法です"
+    STID_ERR_800A           "Warning(800A): パスワードが正しくありません"
+    STID_ERR_800B           "Warning(800B): このバージョンの書庫には対応していません"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_800C           "Warning(800C): ファイルのチェックサムがあっていません"
+    STID_ERR_800D           "Warning(800D): ファイルを開けませんでした"
+    STID_ERR_800E           "Warning(800E): 新しいファイルがすでに存在しています"
+    STID_ERR_800F           "Warning(800F): 同名のファイルが存在していません"
+    STID_ERR_8010           "Warning(8010): 既にファイルが存在しています"
+    STID_ERR_8011           "Warning(8011): ファイル数が多すぎます"
+    STID_ERR_8012           "Error(8012): ディレクトリが作成できません"
+    STID_ERR_8013           "Error(8013): 書き込みエラーが生じました"
+    STID_ERR_8014           "Error(8014): 格納ファイルのハフマンコードが壊れています"
+    STID_ERR_8015           "Error(8015): コメントヘッダが壊れています"
+    STID_ERR_8016           "Error(8016): 書庫ファイルのヘッダのCRCエラーです"
+    STID_ERR_8017           "Error(8017): 書庫ファイルのヘッダが壊れています"
+    STID_ERR_8018           "Error(8018): 書庫ファイルを開くことができません"
+    STID_ERR_8019           "Error(8019): 書庫ファイルが指定されていません"
+    STID_ERR_801A           "Error(801A): ファイルの読み込み時にエラーが生じました"
+    STID_ERR_801B           "Error(801B): この書庫は認識できません"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_801C           "Error(801C): コマンド指定が間違っています"
+    STID_ERR_801D           "Error(801D): 作業用のヒープメモリが不足しています"
+    STID_ERR_801E           "Error(801E): グローバルメモリが不足しています"
+    STID_ERR_801F           "Error(801F): このDLLは動作中です"
+    STID_ERR_8020           "Error(8020): ユーザーによって中断されました"
+    STID_ERR_8021           "Error(8021): 書庫ハンドルが不正か開かれていません"
+    STID_ERR_8022           "Error(8022): 検索モードではありません"
+    STID_ERR_8023           "Error(8023): サポートされていない機能です"
+    STID_ERR_8024           "Error(8024): 日付及び時間指定の書式が間違っています"
+    STID_ERR_8025           "Error(8025): 作業ファイルを作成できません"
+    STID_ERR_8026           "Error(8026): パス名が長すぎます"
+    STID_ERR_8027           "Error(8027): この書庫は書き込み禁止です"
+    STID_ERR_8028           "Error(8028): 異なるパスに同名のファイルがあります"
+    STID_ERR_8029           "Error(8029): 書庫ファイルが見つかりません"
+    STID_ERR_802A           "Error(802A): レスポンスファイルを読みません"
+    STID_ERR_802B           "Error(802B): ファイル名を指定してください"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_802C           "Error(802C): 作業ファイルの書き戻しに失敗したので、残して処理を終了します"
+    STID_ERR_802D           "Error(802D): これより後ろのデータが欠落しています"
+    STID_ERR_802E           "Error(802E): この自己解凍への書庫操作は行えません"
+    STID_ERR_802F           "Error(802F): 作業ファイルを書き戻すための空きがないので、残して処理を終了します"
+    STID_ERR_8030           "Error(8030): ファイルへのアクセスが許可されていません"
+    STID_ERR_8031           "Error(8031): ファイルが見つかりません"
+    STID_ERR_8032           "Error(8032): ログファイルのエラーです"
+    STID_ERR_8033           "Error(8033): デバイスにアクセスできません"
+    STID_ERR_8034           "Error(8034): ファイル属性を取得できません"
+    STID_ERR_8035           "Error(8035): ファイル属性を設定できません"
+    STID_ERR_8036           "Error(8036): ファイル情報が取得できません"
+    STID_ERR_8037           "Error(8037): ファイルポインタを取得できません"
+    STID_ERR_8038           "Error(8038): ファイルポインタを設定できません"
+    STID_ERR_8039           "Error(8039): タイムスタンプを変換できません"
+    STID_ERR_803A           "Error(803A): タイムスタンプを取得できません"
+    STID_ERR_803B           "Error(803B): タイムスタンプを設定できません"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_803C           "Error(803C): ファイルを閉じることができませんでした"
+    STID_ERR_803D           "Error(803D): ヒープメモリのエラーです"
+    STID_ERR_803E           "Error(803E): ハンドルの異常です"
+    STID_ERR_803F           "Error(803F): タイムスタンプの範囲エラーです"
+    STID_ERR_8040           "Error(8040): 書庫の作成に失敗しました"
+    STID_ERR_8041           "Error(8041): パス名とヘッダが適合しません"
+    STID_ERR_8042           "Error(8042): ヘッダ情報が欠落しています"
+    STID_ERR_8043           "Error(8043): 不正なエンドマークです"
+    STID_ERR_8044           "Error(8044): この書庫は他の書庫のメンバです"
+    STID_ERR_8045           "Error(8045): エンドマークが存在しません"
+    STID_ERR_8046           "Error(8046): ヘッダサイズが不正です"
+    STID_ERR_8047           "Error(8047): 未対応のヘッダ形式です"
+    STID_ERR_8048           "Error(8048): 格納ファイルが壊れています"
+    STID_ERR_8049           "Error(8049): 不正なパスです"
+    STID_ERR_804A           "Error(804A): ファイルが大きすぎます"
+    STID_ERR_804B           "Error(804B): 実行可能ファイルです"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_T_CANCEL           "処理を中止しますか？"
+    STID_T_BEGIN            "ファイル: "
+    STID_T_SEARCH           "検索中: "
+END
+
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 英語 (ｱﾒﾘｶ) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_FONTGOTICK         "Courier New"
+    STID_FONTPGOTICK        "MS Sans Serif"
+    STID_REG_STANDARD       "(standard)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_CONFDLG1           "ConfDlg1"
+    STID_CONFDLG2           "ConfDlg2"
+    STID_PROGRESSDLG        "ProgressDlg"
+    STID_SIMPLEPROGDLG      "SimpleProgDlg"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_GETFNAMEDLG        "GetFNameDlg32"
+    STID_GETCMTDLG          "GetCmtDlg32"
+    STID_GETWINSFXDLG       "GetWinSFXDlg32"
+    STID_OVERWRITEDLG       "OverwriteDlg"
+    STID_MAKEDIRECTORYDLG   "MakeDirectoryDlg"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_T_PROC         "Melting..."
+    STID_DLG_P_ARCNAME      "Archive: "
+    STID_DLG_P_FILENAME     "Stored file: "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_P_EXTRACTDIR   "Restore: "
+    STID_DLG_P_WRITESIZE    "Size: "
+    STID_DLG_P_CANCEL       "&Cancel"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_P_OK           "&OK"
+    STID_DLG_T_OWDIALOG     "Confirm Overwriting"
+    STID_DLG_P_OWGROUP      "&Process"
+    STID_DLG_P_OWOVWRITE    "Over&Write"
+    STID_DLG_P_OWNOTOW      "&Skip"
+    STID_DLG_P_OWALLOW      "Overwrite &All"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_P_OWALLNOT     "s&Kip All"
+    STID_DLG_P_BREAK        "&Cancel"
+    STID_DLG_T_CHGFNAME     "Change Filename"
+    STID_DLG_P_FNAMETITLE   "Input File&Name"
+    STID_DLG_T_CDDIALOG     "Create Directory"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_P_CDCREATE     "&Create"
+    STID_DLG_P_CDNOTCREATE  "&Not create"
+    STID_DLG_P_CDALLCREATE  "Create &All"
+    STID_DLG_P_CDALLNOT     "&Skip All"
+    STID_DLG_T_CMTDIALOG    "Input a Comment"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_T_BPDIALOG     "Invalid Path"
+    STID_DLG_P_BPCHGNAME    "&Change and extract"
+    STID_DLG_P_BPNOT        "&Skip"
+    STID_DLG_P_BPALLCHG     "Change &All"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_DLG_T_APDIALOG     "Absolute Path"
+    STID_DLG_P_APRELATIVE   "Assume &Relative path"
+    STID_DLG_P_APABS        "Assume &Absolute path"
+    STID_DLG_P_APINVALID    "Assume &Invalid path"
+    STID_DLG_T_TLDIALOG     "Too big file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_MES_T_WARNING      "Waring Report"
+    STID_MES_T_ERROR        "Error Report"
+    STID_MES_T_PROC         "Processing..."
+    STID_MES_T_COMPRESS     "Compressing..."
+    STID_MES_P_PROCFILE     "Current file: "
+    STID_MES_P_ADDFILE      "Compressing file: "
+    STID_MES_P_WORKFILE     "Temporary file: "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_MES_P_FILECOPY     "Copying file: "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_MES_T_DELETE       "Delete a file"
+    STID_MES_P_DELETE       "Delete '%s'?"
+    STID_MES_P_OVERWRITE    "'%s' already exists. Overwrite?"
+    STID_MES_T_ROWRITE      "Overwrte a file"
+    STID_MES_P_ROWRITE      "'%s' [---w] : Special attributes.\nOverwrite?"
+    STID_MES_P_CRCCHECK     "Checking files..."
+    STID_MES_T_CRCERR       "Delete a file"
+    STID_MES_P_CRCERR       "CRC Errot!\nDelete '%s'?"
+    STID_MES_T_CRCERR2      "CRC Error report"
+    STID_MES_P_CRCERR2      "CRC Error.\n'%s' is broken."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_MES_T_BADHUF       "Invalid Huffman Code"
+    STID_MES_P_BADHUF       "[%s]\nThe huffman code of this file is broken. Skipping.\n"
+    STID_MES_T_NAMECHANGE   "Change filename"
+    STID_MES_P_NAMECHANGE   "Change the filename?"
+    STID_MES_P_SHARE        "[%s]\nFile accessing is prohibited.\nSkipping this file."
+    STID_MES_T_MAKEDIR      "Creating directory"
+    STID_MES_P_MAKEDIR      "[%s]\nCreate this directory?"
+    STID_MES_T_CONTINUE     "Continue"
+    STID_MES_P_CONTINUE     "Continue Process?"
+    STID_MES_T_BADARC       "Bad header"
+    STID_MES_P_BADARC       "[%s]\nHeader is damaged. Skipping this member.\n"
+    STID_MES_T_CONFIRM      "Path name do not confirm to header."
+    STID_MES_P_DICSIZ_WAR   "Only %dKB Dictionary was able to be made."
+    STID_MES_P_DISKSPACE    "Not enough disk space for '%s'.\nContinue?"
+    STID_LOG_WAR_EXTDATA    "Info: Extra data preceeding the first header."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_LOG_WAR_SFX        "Info: SFX archive file."
+    STID_MES_P_BADPATH      "[%s]\nInvalid path. Change it?"
+    STID_MES_P_ABSPATH      "The member(s) that has absolute path is contained the archive.\nAssume relative path?"
+    STID_MES_P_TOOBIG       "'%s' is too big for the file system.\nChange path?"
+    STID_MES_P_EXECUTABLE   "[%s]\nThe member is an executable. Proceed?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_CANTOPEN         ": can't open file."
+    STID_M_MAKEDIR          ": can't make directory."
+    STID_M_DIFFHOST         ": binary file from a different OS(not MS-DOS/Win32)."
+    STID_M_FEXISTS          ": already exists."
+    STID_M_FNEW             ": newer or same file exists."
+    STID_M_FOLD             ": older or same file exists."
+    STID_M_FSAME            ": same file exists."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_FNOEXIST         ": no file exists."
+    STID_M_NOTSPCE          ": disk full."
+    STID_M_RDONLY           ": read only file."
+    STID_M_SPATTR           ": special attributes."
+    STID_M_USKIP            ": skipped by user."
+    STID_M_WRITEER          ": can't write."
+    STID_M_DANNAME          ": name is useless on MS-DOS."
+    STID_M_SHARE            ": can't access"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_TOOLONG          ": pathname is too long."
+    STID_M_TOOBIG           ": file is too big."
+    STID_M_UNKNMETH         ": unknown method '%s'."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_BADPATH          ": invalid path."
+    STID_M_TOO_BIG2         ": file is too big."
+    STID_M_EXEFILE          ": executable file."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_M_ERRORCNT         "Found %d errors!"
+    STID_M_NOSPCL           "Not enough disk space for extraction. Overflow by over %lu bytes."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_8005           "Warning(8005): Not enough disk space."
+    STID_ERR_8006           "Warning(8006): Read only file."
+    STID_ERR_8007           "Warning(8007): Break signaled by user."
+    STID_ERR_8008           "Warning(8008): Unknown file type for MS-DOS."
+    STID_ERR_8009           "Warning(8009): Unknown method."
+    STID_ERR_800A           "Warning(800A): Invalid pathword."
+    STID_ERR_800B           "Warning(800B): New version of extractor is required."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_800C           "Warning(800C): Checkthumb error."
+    STID_ERR_800D           "Warning(800D): Can't open file."
+    STID_ERR_800E           "Warning(800E): Newer or same file exists."
+    STID_ERR_800F           "Warning(800F): No file exists."
+    STID_ERR_8010           "Warning(8010): Already exists."
+    STID_ERR_8011           "Warning(8011): Too many files."
+    STID_ERR_8012           "Error(8012): Can't create directory."
+    STID_ERR_8013           "Error(8013): Can't write file."
+    STID_ERR_8014           "Error(8014): Bad huffman code."
+    STID_ERR_8015           "Error(8015): Broken commemt header."
+    STID_ERR_8016           "Error(8016): Header CRC error."
+    STID_ERR_8017           "Error(8017): Bad header."
+    STID_ERR_8018           "Error(8018): Can't open archive."
+    STID_ERR_8019           "Error(8019): Must specify archive."
+    STID_ERR_801A           "Error(801A): Can't read file."
+    STID_ERR_801B           "Error(801B): Invalid archive."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_801C           "Error(801C): Bad command."
+    STID_ERR_801D           "Error(801D): Heap memory overflow."
+    STID_ERR_801E           "Error(801E): Memory overflow."
+    STID_ERR_801F           "Error(801F): This library is already running."
+    STID_ERR_8020           "Error(8020): User canceled."
+    STID_ERR_8021           "Error(8021): Bad archive handle."
+    STID_ERR_8022           "Error(8022): Not search mode."
+    STID_ERR_8023           "Error(8023): Unsupported function."
+    STID_ERR_8024           "Error(8024): Invalid date string."
+    STID_ERR_8025           "Error(8025): Can't create temporary file."
+    STID_ERR_8026           "Error(8026): Path name is too long."
+    STID_ERR_8027           "Error(8027): This archive is read only."
+    STID_ERR_8028           "Error(8028): Same name files in another path."
+    STID_ERR_8029           "Error(8029): Archive not found."
+    STID_ERR_802A           "Error(802A): Can't read response file."
+    STID_ERR_802B           "Error(802B): Must specify file name."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_802C           "Error(802C): Copying temporary file having been failed, it will be left."
+    STID_ERR_802D           "Error(802D): Unknown EOF."
+    STID_ERR_802E           "Error(802E): Can't add to this SFX archive."
+    STID_ERR_802F           "Error(802F): Not enough disk space for write back temporary file, it will be left."
+    STID_ERR_8030           "Error(8030): File accessing is prohibited."
+    STID_ERR_8031           "Error(8031): Listed file not found."
+    STID_ERR_8032           "Error(8032): Log file error."
+    STID_ERR_8033           "Error(8033): Device not found."
+    STID_ERR_8034           "Error(8034): Can't get attributes."
+    STID_ERR_8035           "Error(8035): Can't set attributes."
+    STID_ERR_8036           "Error(8036): Can't get file infomations."
+    STID_ERR_8037           "Error(8037): Can't get file pointer."
+    STID_ERR_8038           "Error(8038): Can't set file pointer."
+    STID_ERR_8039           "Error(8039): Can't convert time."
+    STID_ERR_803A           "Error(803A): Can't get timestamp."
+    STID_ERR_803B           "Error(803B): Can't set timestamp."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_ERR_803C           "Error(803C): Can't close file."
+    STID_ERR_803D           "Error(803D): Heap memory error."
+    STID_ERR_803E           "Error(803E): Invalid handle."
+    STID_ERR_803F           "Error(803F): Invalid timestamp."
+    STID_ERR_8040           "Error(8040): Failed to make archive file."
+    STID_ERR_8041           "Error(8041): Path name do not confirm to header."
+    STID_ERR_8042           "Error(8042): Unexpected EOF."
+    STID_ERR_8043           "Error(8043): Invalid end mark."
+    STID_ERR_8044           "Error(8044): Involved archive."
+    STID_ERR_8045           "Error(8045): No end mark."
+    STID_ERR_8046           "Error(8046): Invalid header size."
+    STID_ERR_8047           "Error(8047): Header is unknown level."
+    STID_ERR_8048           "Error(8048): Packed file is broken."
+    STID_ERR_8049           "Error(8049): Invalid path."
+    STID_ERR_804A           "Error(804A): Too big file."
+    STID_ERR_804B           "Error(804B): Executable file."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STID_T_CANCEL           "Are you sure to cancel?"
+    STID_T_BEGIN            "File: "
+    STID_T_SEARCH           "Search: "
+END
+
+#endif    // 英語 (ｱﾒﾘｶ) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

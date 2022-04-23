@@ -1,0 +1,118 @@
+;
+; DLL.def
+; Export Definition of Archiver DLL.
+;
+
+LIBRARY UnPma32
+EXPORTS
+		UnPma							@1
+		UnPmaGetVersion				@2
+		UnPmaGetCursorMode			@3
+		UnPmaSetCursorMode			@4
+		UnPmaGetBackGroundMode		@5
+		UnPmaSetBackGroundMode		@6
+		UnPmaGetCursorInterval		@7
+		UnPmaSetCursorInterval		@8
+
+		UnPmaGetRunning				@10
+		UnPmaConfigDialog				@11
+		UnPmaCheckArchive				@12
+		UnPmaGetFileCount				@17
+		UnPmaQueryFunctionList		@18
+
+		UnPmaOpenArchive				@21
+		UnPmaCloseArchive				@22
+		UnPmaFindFirst				@23
+		UnPmaFindNext					@24
+
+		UnPmaExtract					@25
+		UnPmaAdd						@26
+		UnPmaMove						@27
+		UnPmaDelete					@28
+
+		UnPmaGetArcFileName			@31
+		UnPmaGetArcFileSize			@32
+		UnPmaGetArcOriginalSize		@33
+		UnPmaGetArcCompressedSize		@34
+		UnPmaGetArcRatio				@35
+		UnPmaGetArcDate				@36
+		UnPmaGetArcTime				@37
+		UnPmaGetArcOSType				@38
+		UnPmaIsSFXFile				@39
+		UnPmaGetFileName				@40
+		UnPmaGetOriginalSize			@41
+		UnPmaGetCompressedSize		@42
+		UnPmaGetRatio					@43
+		UnPmaGetDate					@44
+		UnPmaGetTime					@45
+		UnPmaGetCRC					@46
+		UnPmaGetAttribute				@47
+		UnPmaGetOSType				@48
+
+		UnPmaExtractMem				@49
+		UnPmaCompressMem				@50
+
+		UnPmaGetMethod				@61
+		UnPmaGetWriteTime				@62
+		UnPmaGetCreateTime			@63
+		UnPmaGetAccessTime			@64
+		UnPmaGetWriteTimeEx			@65
+		UnPmaGetCreateTimeEx			@66
+		UnPmaGetAccessTimeEx			@67
+		UnPmaGetArcCreateTimeEx		@68
+		UnPmaGetArcAccessTimeEx		@69
+		UnPmaGetArcWriteTimeEx		@70
+
+		UnPmaGetSubVersion			@94
+		UnPmaGetBuild					@95
+		UnPmaRun						@96
+		UnPmaCommandLine				@97
+
+		UnPmaSetEnumMembersProc		@99
+		UnPmaClearEnumMembersProc		@100
+
+		SetLangueJapanese			@101 PRIVATE
+		SetLangueEnglish			@102 PRIVATE
+
+		UnPmaGetArcFileSizeEx			@103
+		UnPmaGetArcOriginalSizeEx		@104
+		UnPmaGetArcCompressedSizeEx	@105
+		UnPmaGetOriginalSizeEx		@106
+		UnPmaGetCompressedSizeEx		@107
+
+		UnPmaSetEnumMembersProc64	@110
+		UnPmaClearEnumMembersProc64	@111
+
+		UnPmaGetArcReadSize			@113
+		UnPmaGetArcReadSizeEx			@114
+
+		SetLangueSpecified			@115 PRIVATE
+		UnPmaSetLangueSpecified		@116
+		UnPmaSetLangueJapanese		@117
+		UnPmaSetLangueEnglish			@118
+
+		UnPmaSetPriority				@119
+
+		UnPmaFindFirstEx				@120
+		UnPmaFindNextEx				@121
+		UnPmaGetMemo				@122
+
+MxdGetVersion			PRIVATE
+MxdGetProtocolVersion	PRIVATE
+MxdConfigName			PRIVATE
+MxdConfigDialog			PRIVATE
+MxdCheckArchive			PRIVATE
+MxdUnpackArchive		PRIVATE
+MxdPackArchive			PRIVATE
+
+DPS_QuestionName		PRIVATE
+DPS_QuestionVersion		PRIVATE
+DPS_QuestionRMenuName	PRIVATE
+DPS_QuestionMakeName	PRIVATE
+DPS_QuestionMakeType	PRIVATE
+DPS_CallByStartUp		PRIVATE
+DPS_CallByRMenu			PRIVATE
+DPS_CallByPluginMenu	PRIVATE
+DPS_CallByCheckFile		PRIVATE
+DPS_CallByExpandFile	PRIVATE
+DPS_CallByMakeFile		PRIVATE
