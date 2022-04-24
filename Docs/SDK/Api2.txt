@@ -1,0 +1,453 @@
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            UnPma32.dll API仕様書 (2)
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+※この仕様書にはUnPma32.dllと整合しない部分がある可能性が在ります。
+
+※UnPma32.dllでは、ワークファイルは使用しておりません。
+
+XXindexXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  ∴メッセージ・コールバック・構造体について
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+∴メッセージ・コールバックについて
+
+<UnPma32.dllが出すウィンドウメッセージ>
+●wm_arcextract
+
+wm_arcextract
+
+nMode = (int)wParam                     /* 通知モードを表す */
+lpEis = (LPEXTRACTINGINFO)lParam        /* 構造体を指すポインタ */
+
+　wm_arcextract メッセージは，UnPmaSetOwnerWindow() で設定したウィンドウ
+にUnPma32.dllから送られます。このメッセージを受け取ることにより，UnPma32.
+DLL がこれから処理する格納ファイル名やファイルサイズ等を得ることができま
+す。
+
+　wm_arcextract メッセージを使用する場合には，RegisterWindowMessage() でシ
+ステムに登録した上で使用するようにしてください。
+
+nMode           wParam の値です。UnPma32.dllの処理の状態を表します。
+
+        0 : UnPma32.dllが該当ファイルの処理を開始することを表します。
+        1 : UnPma32.dllが該当ファイルの処理中であることを表します。
+        2 : UnPma32.dllが処理を終え，lpEis のメモリを開放しようとしてい
+            ることを表します。
+        3 : UnPma32.dllが該当書庫の処理を開始することを表します。szSour-
+            ceFileName に書庫名が格納されます。
+        4 : UnPma32.dllがワークファイルの書き戻しを開始することを表しま
+            す。szSourceFileName にワークファイル名が格納されます。
+        5 : UnPma32.dllがファイルをサーチ中であることを表します。検索に
+            マッチしたファイルのファイル名が得られます。
+        6 : UnPma32.dllが該当ファイルの格納を終えたことを表します。圧縮
+            サイズ等はこのメッセージがきた時点で有効となります。
+        7 : UnPma32.dllが書庫のチェックを開始することを表します。szSour-
+            ceFileName にワークファイル名が格納されます。
+
+lpEis           lParam の値です。 ファイル名等を格納する  EXTRACTINGINFO
+                構造体を指すポインタです。
+
+戻り値
+
+　このメッセージを処理するアプリケーションは，0 を返さなければなりません。
+反対に 0 以外を返すことにより， UnPma32.dllに展開処理を中止させることが
+できます。ただし，nMode が 4 の場合は中止されません。
+
+<ARCHIVERPROC>
+typedef BOOL CALLBACK ARCHIVERPROC(HWND _hwnd, UINT _uMsg,
+            UINT _nState, LPVOID _lpEis);
+
+    _hwnd       UnPmaSetOwnerWindowEx で指定したウィンドウハンドルが渡さ
+                れます。
+    _uMsg       現在のところは wm_arcextract となります。
+    _nState     wm_arcextract の wParam，つまり nMode が格納されます。
+    _lpEis      構造体へのポインタです。格納ファイルに関する情報が得られ
+                ます。実際には，次のどれかとなります。
+
+            LPEXTRACTINGINFOEX _lpEis
+                    UnPmaSetOwnerWindowEx() か  sizeof(EXTRACTINGINFOEX)
+                    を指定して UnPmaSetOwnerWindowEx64() を使用した場合。
+            LPEXTRACTINGINFOEX32 _lpEis
+                    sizeof(EXTRACTINGINFOEX32) を指定して UnPmaSetOwner-
+                    WindowEx64() を使用した場合。
+            LPEXTRACTINGINFOEX64 _lpEis
+                    sizeof(EXTRACTINGINFOEX64) を指定して UnPmaSetOwner-
+                    WindowEx64() を使用した場合。
+
+　ARCHIVERPROC は UnPma32.dllに処理を継続させるときは TRUE， 中止させる
+ときは FALSE を返さなければなりません。 ただし，作業ファイルの書き戻し時
+には FALSE を返しても処理を中止することはできません。
+
+<処理の流れ>
+１．nMode 3 でメッセージを送出。書庫名を得られる。
+
+　前処理が行われる場合（格納時の圧縮ファイルのサーチや，展開時の合計チェッ
+  ク等）には以下のメッセージを送出。
+
+２．nMode 5 でメッセージを送出。格納ファイル名と格納時にはサーチされたファ
+    イル名が得られる。処理が終了するまで，検索にマッチしたファイルごとに
+    メッセージを送出。
+
+３．格納ファイル毎に nMode 0 でメッセージを送出。 格納ファイル名を得られ
+    る。
+
+　格納・展開などの処理が行われた場合，は以下のメッセージをさらに送出。
+
+４．nMode 0 でメッセージを送出。格納ファイル名等を得られる。
+５．nMode 1 でメッセージを送出。書き込みサイズが得られる。そのファイルに
+    ついての展開処理が終了するまで，このメッセージを送出し続ける。
+
+　格納の場合は圧縮結果を報告するため以下のメッセージを送出
+
+６．nMode 6 でメッセージを送出。格納の場合は，このメッセージで始めて全て
+    のメンバが有効となる。
+
+  書庫操作の場合は，以下の 7～10 のメッセージを送出。
+
+７．nMode 7 でメッセージを送出することにより，ワークファイルのチェックの
+    開始を表す。
+８．nMode 1 でメッセージを送出。ワークファイルのチェックが終了するまでこ
+    のメッセージを送出し続ける。
+９．nMode 4 でメッセージを送出することで，ワークファイル書き戻しの開始を
+    表す。ワークファイル名を得られる。
+10．nMode 1 でメッセージを送出。ワークファイルの書き戻しが終了するまでこ
+    のメッセージを送出しつづける。
+
+　すべての処理が終了した時点で（展開状況表示を消すタイミング），
+
+11．nMode 2 でメッセージを送出。
+
+<WND_ENUMMEMBPROC>
+typedef BOOL CALLBACK WND_ENUMMEMBPROC(LPVOID _lpInfo);
+
+機能
+        書庫の情報を受け取るための，アプリケーションで定義されたコールバッ
+        ク関数です。
+        格納ファイル名等の指定を細かく行いたい場合などでの使用を本来の目
+        的としているため，UnPma() で指定されたスイッチ等を反映して検索を
+        行った結果，マッチしたものについてのみここで指定したコールバック
+        関数が呼ばれる仕様となっています。
+
+引数
+        _lpInfo     書庫のメンバの情報を格納した構造体へのポインタ。この
+                    構造体の情報を書き換えた上で TRUE を返すことで UnPma32w.
+                    dllに各種の処理を行わせることができます。実際には，
+                    次のどちらかになります。
+
+                LPUnPma_ENUM_MEMBER_INFO _lpInfo
+                        UnPmaSetEnumMembersProc() か  sizeof(ENUM_
+                        MEMBER_INFO) を指定して UnPmaSetEnumMembersProc-
+                        64() を使用した場合。
+                LPUnPma_ENUM_MEMBER_INFO64 _lpInfo
+                        sizeof(ENUM_MEMBER_INFO64)  を指定して Un-
+                        lhaSetEnumMembersProc64() を使用した場合。
+
+戻り値
+        TRUE        _lpInfo  の情報に従ってUnPma32.dllに処理を行わせま
+                    す。
+        FALSE       UnPma32.dllに当該メンバの処理をスキップさせます。
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+∴構造体について
+
+<INDIVIDUALINFO>
+	typedef struct {
+		DWORD	dwOriginalSize;
+		DWORD	dwCompressedSize;
+		DWORD	dwCRC;
+		UINT	uFlag;
+		UINT	uOSType;
+		WORD	wRatio;
+		WORD	wDate;
+		WORD	wTime;
+		char	szFileName[FNAME_MAX32 + 1];
+		char	dummy1[3];
+		char	szAttribute[8];
+		char	szMode[8];
+	} INDIVIDUALINFO;
+
+	・dwOriginalSize	圧縮前の、格納ファイルのサイズ。
+	・dwCompressedSize	圧縮後の、格納ファイルのサイズ。
+	・dwCRC			格納ファイルのCRC。
+	・wRatio		格納ファイルの圧縮率(千分率)。
+	・szFileName		格納ファイル名。
+	・szAttribute		格納ファイルの属性。FA_*を組み合わせた数字を文字列にしたもの。
+				全てONなら、DHSRGとなります。
+	・szMode		無圧縮:Store ERISA符号化:Erisa 暗号化:Bshf ERISA符号化+暗号化:EriBshf
+	・wDate			格納ファイルの更新日付(DOS 形式)。
+	・wTime			格納ファイルの更新時間(DOS 形式)。
+	・他のメンバは全て０クリアされます。
+
+<INDIVIDUALINFOEX>
+※HArcLib独自の構造体です。
+	typedef struct {
+		INT64		llOriginalSize;
+		INT64		llCompressedSize;
+		DWORD		dwCRC;
+		UINT		uFlag;
+		UINT		uOSType;
+		WORD		wRatio;
+		FILETIME	ftCreateTime;
+		FILETIME	ftAccessTime;
+		FILETIME	ftWriteTime;
+		DWORD		dwAttributes;
+		char		szFileName[FNAME_MAX32 + 1];
+		char		szMode[32];
+		char		szReserved[32];
+	} INDIVIDUALINFOEX, *LPINDIVIDUALINFOEX;
+
+	・llOriginalSize	圧縮前の、格納ファイルのサイズ。
+	・llCompressedSize	圧縮後の、格納ファイルのサイズ。
+	・dwCRC			格納ファイルのCRC。
+	・wRatio		格納ファイルの圧縮率(千分率)。
+	・szFileName		格納ファイル名。
+	・dwAttributes		格納ファイルの属性。FA_*を組み合わせた数字。
+	・szMode		無圧縮:Store ERISA符号化:Erisa 暗号化:Bshf ERISA符号化+暗号化:EriBshf
+	・ftCreateFile		FILETIME 形式によるファイルの作成日時。
+	・ftAccessTime		FILETIME 形式によるファイルの参照日時。
+	・ftWriteTime		FILETIME 形式によるファイルの更新日時。
+	・他のメンバは全て０クリアされます。
+
+<EXTRACTINGINFO>
+	typedef struct {
+		DWORD	dwFileSize;
+		DWORD	dwWriteSize;
+		char	szSourceFileName[FNAME32_MAX + 1];
+		char	dummy1[3];
+		char	szDestFileName[FNAME32_MAX + 1];
+		char	dummy[3];
+	} EXTRACTINGINFO;
+
+	・dwFileSize		格納ファイルのサイズ。
+	・dwWriteSize		展開処理で書き込んだサイズ。
+	・szSourceFileName	処理を行う格納ファイル名。
+	・szDestFileName	実際に書き込まれるパス名。
+
+<EXTRACTINGINFOEX>
+	typedef struct {
+		EXTRACTINGINFO	exinfo;
+		DWORD	dwCompressedSize;
+		DWORD	dwCRC;
+		UINT	uOSType;
+		WORD	wRatio;
+		WORD	wDate;
+		WORD	wTime;
+		char	szAttribute[8];
+		char	szMode[8];
+	} EXTRACTINGINFOEX;
+
+	・exinfo		EXTRACTINGINFO 構造体が格納されます。
+	・dwCompressedSize	格納ファイルの圧縮サイズ。
+	・dwCRC			格納ファイルのCRC。
+	・wRatio		パーミル (千分率) による格納ファイルの圧縮率。
+	・wDate			格納ファイルの更新日付(DOS 形式)。
+	・wTime			格納ファイルの更新時刻(DOS 形式)。
+	・szAttribute		格納ファイルの属性。
+	・szMode		圧縮メソッド。
+	・他のメンバは全て０クリアされます。
+
+<EXTRACTINGINFOEX32>
+	typedef struct {
+		DWORD		dwStructSize;
+		EXTRACTINGINFO	exinfo;
+		DWORD		dwFileSize;
+		DWORD		dwCompressedSize;
+		DWORD		dwWriteSize;
+		DWORD		dwAttributes;
+		DWORD		dwCRC;
+		UINT		uOSType;
+		WORD		wRatio;
+		FILETIME	ftCreateTime;
+ 		FILETIME	ftAccessTime;
+		FILETIME	ftWriteTime;
+		char		szMode[8];
+		char		szSourceFileName[FNAME_MAX32 + 1];
+		char		dummy1[3];
+		char		szDestFileName[FNAME_MAX32 + 1];
+ 		char		dummy2[3];
+	} EXTRACTINGINFOEX32;
+
+	・dwStructSize		この構造体のサイズが格納されています。
+	・exinfo		EXTRACTINGINFO 構造体が格納されます。
+	・dwFileSize		格納ファイルのCRC。
+	・dwCompressedSize	格納ファイルの圧縮サイズ。
+	・dwWriteSize		展開処理で書き込んだサイズ。
+	・dwAttributes		格納ファイルの属性。
+	・dwCRC			格納ファイルのチェックサム。
+	・wRatio		パーミル (千分率) による格納ファイルの圧縮率。
+	・ftCreateFile		FILETIME 形式によるファイルの作成日時。
+	・ftAccessTime		FILETIME 形式によるファイルの参照日時。
+	・ftWriteTime		FILETIME 形式によるファイルの更新日時。
+	・szMode		圧縮メソッド。
+	・szSourceFileName	処理を行う格納ファイル名。
+	・szDestFileName	実際に書き込まれるパス名。
+	・他のメンバは全て０クリアされます。
+
+<EXTRACTINGINFOEX64>
+	typedef struct {
+		DWORD		dwStructSize;
+		EXTRACTINGINFO	exinfo;
+		INT64		llFileSize;
+		INT64		llCompressedSize;
+		INT64		llWriteSize;
+		DWORD		dwAttributes;
+		DWORD		dwCRC;
+		UINT		uOSType;
+		WORD		wRatio;
+		FILETIME	ftCreateTime;
+		FILETIME	ftAccessTime;
+		FILETIME	ftWriteTime;
+		char		szMode[8];
+		char		szSourceFileName[FNAME_MAX32 + 1];
+		char		dummy1[3];
+		char		szDestFileName[FNAME_MAX32 + 1];
+		char		dummy2[3];
+	} EXTRACTINGINFOEX64;
+
+	・dwStructSize		この構造体のサイズが格納されています。
+	・exinfo		EXTRACTINGINFO 構造体が格納されます。
+	・llFileSize		格納ファイルのサイズ。
+	・llWriteSize		展開処理で書き込んだサイズ。
+	・llCompressedSize	格納ファイルの圧縮サイズ。
+	・dwAttributes		格納ファイルの属性。
+	・dwCRC			格納ファイルのCRC。
+	・wRatio		パーミル (千分率) による格納ファイルの圧縮率。
+	・ftCreateFile		FILETIME 形式によるファイルの作成日時。
+	・ftAccessTime		FILETIME 形式によるファイルの参照日時。
+	・ftWriteTime		FILETIME 形式によるファイルの更新日時。
+	・szMode		圧縮メソッド。
+	・szSourceFileName	処理を行う格納ファイル名。
+	・szDestFileName	実際に書き込まれるパス名。
+	・他のメンバは全て０クリアされます。
+
+<ENUM_MEMBER_INFO>
+	typedef struct {
+		DWORD		dwStructSize;
+		UINT		uCommand;
+		DWORD		dwOriginalSize;
+		DWORD		dwCompressedSize;
+		DWORD		dwAttributes;
+		DWORD		dwCRC;
+		UINT		uOSType;
+		WORD		wRatio;
+		FILETIME	ftCreateTime;
+		FILETIME	ftAccessTime;
+		FILETIME	ftWriteTime;
+		char		szFileName[FNAME_MAX32 + 1];
+		char		dummy1[3];
+		char		szAddFileName[FNAME_MAX32 + 1];
+		char		dummy2[3];
+    	} ENUM_MEMBER_INFO, *LPENUM_MEMBER_INFO;
+
+	・dwStructSize		この構造体のサイズが格納されています。
+	・uCommand		UnPma() がどの命令を処理中かを示します。
+	・dwOriginalSize	メンバのファイルサイズ。
+	・dwCompressedSize	メンバの圧縮後のファイルサイズ。a 命令等で追加
+				されるファイルについての呼び出し時には，値は無
+				意味。
+	・dwAttributes		メンバの属性。
+	・dwCRC			格納ファイルのCRC。
+	・wRatio		メンバのパーミル (千分率) による圧縮率。追加される
+				ファイルの場合は不定。
+	・ftCreateFile		FILETIME 形式によるファイルの作成日時。
+	・ftAccessTime		FILETIME 形式によるファイルの参照日時。
+	・ftWriteTime		FILETIME 形式によるファイルの更新日時。
+	・szFileName		メンバのパスを含めた名前。
+	・szAddFileName		a 命令等の場合には実際に格納されるファイルの名
+				前。e 命令等の場合にはここで示されているディレ
+				クトリと名前で展開が行われます。
+	・他のメンバは全て０クリアされます。
+
+<ENUM_MEMBER_INFO64>
+	typedef struct {
+		DWORD		dwStructSize;
+		UINT		uCommand;
+		INT64		llOriginalSize;
+		INT64		llCompressedSize;
+		DWORD		dwAttributes;
+		DWORD		dwCRC;
+		UINT		uOSType;
+		WORD		wRatio;
+		FILETIME	ftCreateTime;
+		FILETIME	ftAccessTime;
+		FILETIME	ftWriteTime;
+		char		szFileName[FNAME_MAX32 + 1];
+		char		dummy1[3];
+		char		szAddFileName[FNAME_MAX32 + 1];
+		char		dummy2[3];
+	} ENUM_MEMBER_INFO64, *LPENUM_MEMBER_INFO64;
+
+	・dwStructSize		この構造体のサイズが格納されています。
+	・uCommand		UnPma() がどの命令を処理中かを示します。
+	・llOriginalSize	メンバのファイルサイズ。
+	・llCompressedSize	メンバの圧縮後のファイルサイズ。a 命令等で追加
+				されるファイルについての呼び出し時には，値は無
+				意味。
+	・dwAttributes		メンバの属性。
+	・dwCRC			格納ファイルのCRC。
+	・wRatio		メンバのパーミル (千分率) による圧縮率。追加される
+				ファイルの場合は不定。
+	・ftCreateFile		FILETIME 形式によるファイルの作成日時。
+	・ftAccessTime		FILETIME 形式によるファイルの参照日時。
+	・ftWriteTime		FILETIME 形式によるファイルの更新日時。
+	・szFileName		メンバのパスを含めた名前。
+	・szAddFileName		a 命令等の場合には実際に格納されるファイルの名
+				前。e 命令等の場合にはここで示されているディレ
+				クトリと名前で展開が行われます。
+	・他のメンバは全て０クリアされます。
+
+<コマンドによる処理の違い>
+   (1)  LIST_COMMAND      l，v 命令
+
+        構造体の情報は無視され，TRUE が返されたものについてリストを表示。
+
+   (2)  ADD_COMMAND       a，u，m 命令
+   (3)  FRESH_COMMAND     f 命令
+
+        次の情報を利用して書庫にファイルを格納する。
+            szFileName          ここで指定された名前で書庫に格納。
+            szAddFileName       ここで指定されたファイルを格納。
+
+   (4)  DELETE_COMMAND    d 命令
+
+        構造体の情報は無視され， TRUE が返されたものについて書庫からの削
+        除が行われる。
+
+   (5)  EXTRACT_COMMAND   e，x 命令
+
+        次の情報を利用してメンバを展開。
+            szAddFileName       ここで指定されたディレクトリと名前でファ
+                                イルを展開。
+
+   (6)  PRINT_COMMAND     p 命令
+
+        構造体の情報は無視され， TRUE が返されたものについてバッファへの
+        出力が行われる。
+
+   (7)  TEST_COMMAND      t 命令
+
+        構造体の情報は無視され， TRUE が返されたものについてテストが行わ
+        れる。
+
+   (8)  MAKESFX_COMMAND   s 命令
+
+        次の情報を利用して SFX に格納。
+            szFileName          ここで指定された名前に変更してメンバを
+                                SFX に格納。
+
+   (9)  JOINT_COMMAND     j 命令
+
+        次の情報を利用して書庫にメンバを追加。
+            szFileName          ここで指定された名前に変更して書庫に追加。
+
+  (10)  CONVERT_COMMAND   y 命令
+
+        次の情報を利用してメンバのヘッダを変換。
+            szFileName          ここで指定された名前に変更。
+
+  (11)  RENAME_COMMAND    n 命令
+
+        次の情報を利用してメンバの名前を変更。
+            szFileName          ここで指定された名前に変更。

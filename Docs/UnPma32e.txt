@@ -1,0 +1,118 @@
+//
+// UnPma32.dll
+// Copyright (C) HAL "Minthe" Pussywillow
+//
+// This version can extract: -pm0- -pm2-
+//
+
+If you want to know about the command, API or License,
+please tell me: cinnamon at hal dot tn dot st
+
+The copyright of PMarc belongs to Pepper Mint star.
+http://www.asahi-net.or.jp/~am9y-mn/
+
+The copyright of UnPMA routine (I refered) belongs to Maarten ter Huurne.
+http://www.stack.nl/~mth/msx/ (Dead Link)
+
+0.Introduction
+Thank you for downloading UnPma32.dll!
+
+This a DLL (Dynamic Link Library) to extract PepperMint star's Archiver.
+It was used in CP/M and MSX-DOS and the -pm2- method can achieve
+the same compression ratio as -lh5-.
+
+UnPma32.dll is a program of Win32.
+You can use this under WinXP/2000/2003/NT/ME/98(SE)/95.
+I don't know if you can use this under Win32s.
+
+UnPma32.dll is based upon Common Archiver API.
+But these APIs may be changed in the future :)
+
+1.Files
+#All files except source and this file are in Japanese.
+
+[Root]
+|-SDK
+|	Api.txt		API Guide
+|	Command.txt	Command Guide
+|	History.txt	History
+|	DTV.txt		About Directory Traversal Vulnerability
+|	pma.b2e		b2e for Noah+ 
+|	UnPma32.lib	Static Link Library(use extern "C")
+|	UnPma32.dps	DPS using UnPma32.dll
+|	UnPma32.mxd	MXD using UnPma32.dll
+UnPma32.dll		DLL
+UnPma32.txt		Japanese document
+UnPma32e.txt	This document
+
+The source codes for UnPma32.dps/mxd are available at:
+http://hp.vector.co.jp/authors/VA039361/
+
+Sorry, the source code and header file for UnPma32.dll is NOT available for the time being.
+The API Prefix is "UnPma".
+(I think I will be able to sell it in the future, maybe.)
+
+2.How to use
+UnPma32.dll is a library. So you cannot use it by itself.
+
+A.Making Application
+Please see Api.txt/Command.txt.
+
+There are two ways to link with UnPma32.dll:
+I.Static link
+Link UnPma32.lib with your application.
+II.Dynamic link
+Use LoadLibrary()/GetProcAddress().
+
+Please link dynamically to run your programs
+even without UnPma32.dll (except UnPma32.dll functions.)
+
+B.Used by normal user
+UnPma32.dll can run using
+Rundll32 UnPma32.dll,UnPmaRun <command>.
+But you should use Applications supporting this.
+
+3.Deleloping Envioronment
+UnPma32.dll is developed with:
+Microsoft Windows XP Professional Build 2600 SP2 (uxtheme.dll customed)
+Pentium4 2.40BGhz + 512MB-RAM
+Compiler: Visual C++ Express 2005 Beta2
+
+4.Running Tested Envioronment
+WinXP Pro SP2 (uxtheme.dll customed)
+
+5.Place of Distribution
+HAL's Room (1st Place)  http://f50.aaa.livedoor.jp/~minthe/pukiwiki/
+Arcdll     (2nd Place)  http://arcdll.sourceforge.jp/
+Common Archiver Project http://www.csdinc.co.jp/archiver/
+
+6.Support
+mail:
+hal@arcdll.org
+(cinnamon@hal.tn.st is also OK)
+
+You are prohibitted from asking questions to shoda T,
+administrator of Common Archiver Project, about UnPma32.dll.
+
+The copyright of PMarc belongs to Pepper Mint star.
+The copyright of UnPMA routine belongs to Maarten ter Huurne.
+
+They have NOTHING to do with UnPma32.dll,
+so you are prohibited from asking questions to them.
+
+7.Showing Copyright
+I recommend these four formats:
+Hƒ©L "ƒªƒÇƒËƒ¦ƒÃ" Pussywillow
+HAL "Minthe" Pussywillow
+HAL M. Pussywillow
+HAL
+But if you want to use another like "Mint", I don't mind.
+
+8.Special Thanks
+I thank Pepper Mint star, Maarten ter Huurne,
+and users using UnPma32.dll!
+
+9.Lastly...
+I hope UnPma32.dll is useful for many users.
+
+HAL "Minthe" Pussywillow

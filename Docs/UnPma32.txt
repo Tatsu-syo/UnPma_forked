@@ -1,0 +1,122 @@
+//
+// UnPma32.dll Version 0.02
+// Copyright (C) HAL "Minthe" Pussywillow
+//
+// See UnPma32e.txt for English document.
+//
+// 現在-pm0-と-pm2-しか解凍できません。
+//
+
+PMarcの著作権はぺぱあみんと★すたあ氏が保有しています。
+http://www.asahi-net.or.jp/~am9y-mn/
+
+参考にしたUnPMAルーチンの著作権はMaarten ter Huurne氏が保有しています。
+http://www.stack.nl/~mth/msx/ (デッドリンク)
+
+0.はじめに
+このたびはUnPma32.dllをダウンロードいただきありがとうございます。
+
+UnPma32.dllは、PMarc書庫を解凍するためのDLL
+(ダイナミックリンクライブラリ)です。
+PMarcとはPepperMint star's Archiverの略で、CP/MやMSX-DOSで利用されます。
+-pm2-メソッドは-lh5-と同等の圧縮率を誇ります。
+
+UnPma32.dllはWin32用のプログラムであるため、
+WinXP/2003/2000/NT/ME/98(SE)/95上でのみ使用できます。
+Win32sでの動作は保障しておりません。
+
+UnPma32.dllは、現在進行中の統合アーカイバAPI仕様に準拠してはいますが、
+統合API仕様自体今後変更の可能性がありますので、
+現在のものが最終決定版ではないということを理解したうえでご使用ください。
+
+1.ファイルについて
+UPma*.zipを展開すると以下のファイルが得られます。
+
+[Root]
+|-SDK
+|	Api.txt		API仕様書
+|	Command.txt	コマンドライン仕様書
+|	History.txt	更新履歴
+|	DTV.txt		DTVについて
+|	pma.b2e		Noah+用b2e
+|	UnPma32.lib	静的リンク用ライブラリ(extern "C"でご利用ください)
+|	UnPma32.dps	代替 Deaces Plugin System file
+|	UnPma32.mxd	代替 dll for Meltice eXtenDing
+UnPma32.dll		本体
+UnPma32.txt		このファイル
+UnPma32e.txt	英語版ドキュメント
+
+UnPma32.dps/mxdのソースコードは、
+HAL's Lab@AAACafe->PukiWiki内、Temporary Filesにございます。
+
+2.使用法
+
+A.プログラマが対応アプリを作成する場合
+API等については、Api.txt/Cmd.txtを参照してください。
+
+UnPma32.dllを使用するには、二つの方法があります。
+I.静的リンク
+UnPma32.libをリンクして使用する方法です。
+II.動的リンク
+LoadLibrary()/GetProcAddress()により
+動的にリンクして使用する方法です。
+
+できれば動的リンクを用い、UnPma32.dllがなくても
+(PMA解凍機能が使えないだけで)
+ソフトが使えるようにしてください。
+
+B.一般ユーザが使用する場合
+このNOA32w.dllは、UnPmaRun()により、
+Rundll32 UnPma32.dll,UnPmaRun <command>
+と入れれば動作させることができますが、
+かなり制約が多いので、対応を謳っている
+ソフトを使用すべきです。
+
+3.開発環境
+UnPma32.dllは以下の環境で開発されました。
+Microsoft Windows XP Professional Build 2600 SP2 (uxtheme.dll改造済)
+Pentium4 2.40BGhz + 512MB-RAM
+コンパイラ Visual C++ 6 SP5
+
+4.動確環境
+WinXP Pro SP2 (uxtheme.dll改造済)
+
+5.配布先
+UnPma32.dllの一次配布先は、http://f50.aaa.livedoor.jp/~minthe/pukiwiki/
+となっています。
+
+二次配布先は、http://arcdll.sourceforge.jp/です。
+
+DLLの使用法等の情報も得られることから
+『統合アーカイバプロジェクト』http://www.csdinc.co.jp/archiver/
+等からダウンロードするのが良いでしょう。
+
+6.サポート
+A.メール
+hal@arcdll.org
+(cinnamon@hal.tn.stでも一応届きます)
+B.BBS
+http://f50.aaa.livedoor.jp/~minthe/pukiwiki/内の板でお願いします。
+
+『統合アーカイバプロジェクト』http://www.csdinc.co.jp/archiver/
+の管理者である  shoda T. 氏へ、UnPma32.dllに関する問い合わせはしないでください。
+
+PMarcの著作権はぺぱあみんと★すたあ氏、UnPMAルーチンの著作権はMaarten ter Huurne氏にございますが、
+UnPma32.dllとは関係ないので、UnPma32.dllに関する問い合わせはしないでください。
+
+7.著作権表示
+HΛL "ΜινΘε" Pussywillow
+HAL "Minthe" Pussywillow
+HAL M. Pussywillow
+HAL
+の4つを推奨しておきますが、
+他の表記でも問題ありません。
+
+8.謝辞
+ぺぱあみんと★すたあ、Maarten ter Huurne両氏、
+そして今お使いいただいているユーザの皆様に感謝申し上げます。
+
+9.最後に
+UnPma32.dllがユーザの役に立つことを願ってやみません。
+
+HAL "Minthe" Pussywillow
