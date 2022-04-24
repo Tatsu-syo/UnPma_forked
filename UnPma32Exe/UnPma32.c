@@ -6,7 +6,7 @@
 // Result buffer size
 #define RBUFSIZE 1024000
 
-void UNLHAputs(const char *s)
+void UNPmaPuts(const char *s)
 {
 	char c = '\0';
 
@@ -32,7 +32,35 @@ void UNLHAputs(const char *s)
 
 void Usage(void)
 {
-	UNLHAputs("UnPma32 By Tatsuhiko Syoji 2001,2022\nUsage:UnPma UnPma option\n\nPlease see UnPma32.DLL's manual.\n");
+	UNPmaPuts("UnPma32.exe By Tatsuhiko Syoji 2001,2022\n"
+		"Usage:\n"
+		"UnPma32 [command] [<-|/>switches...] <arcfile> [dir\\] [file...|@filelist]\n"
+		"command:\n"
+		"l listing.\n"
+		"c(v) listing with path.\n"
+		"e Extract\n"
+		"x Extract with path\n"
+		"\n"
+		"switches:\n"
+		"--? End command line parseing[--@ before archive file name]\n"
+		"-a  Extract attribute [-a1]\n"
+		"-b  Leave broken file [-b0]\n"
+		"-e  Treat warning as error [-e0]\n"
+		"-f  Force overwrite [-f0]\n"
+		"-n  Supress window [-n0]\n"
+		"-p  Match all path [-p0]\n"
+		"-t  Extract time stamp [-t1]\n"
+		"-w  Use specified working folder [-w.]\n"
+		"\n"
+		"arcfile:\n"
+		"Target archive file.\n"
+		"dir:\n"
+		"Extract target directory.\n"
+		"file:\n"
+		"Files to extract.\n"
+		"filelist:\n"
+		"Extract files name listing file.If you don't specify --?, you must add '@' in listing file name.\n"
+	);
 }
 
 const char *noMemMes = "No enough memory.\n";
@@ -41,7 +69,7 @@ typedef int (WINAPI *TFUNC)(HWND,char *,char *,unsigned int);
 int main(int argc,char *argv[])
 {
     static HINSTANCE   hInstDLL;       /*  ÇcÇkÇkÇÃÉCÉìÉXÉ^ÉìÉXÉnÉìÉhÉã                */
-    static TFUNC       Unlha;    /*  ÇcÇkÇkÇÃÇlÇôÇeÇïÇéÇÉÇîÇâÇèÇéÇ÷ÇÃÉ|ÉCÉìÉ^    */
+    static TFUNC       Unpma;    /*  ÇcÇkÇkÇÃÇlÇôÇeÇïÇéÇÉÇîÇâÇèÇéÇ÷ÇÃÉ|ÉCÉìÉ^    */
 	char *combuf,*resultbuf;
 	int i,comLen,result;
 
@@ -53,7 +81,7 @@ int main(int argc,char *argv[])
 
 	resultbuf = malloc(RBUFSIZE);
 	if (resultbuf == NULL){
-		UNLHAputs(noMemMes);
+		UNPmaPuts(noMemMes);
 		return 1;
 	}
 
@@ -63,8 +91,8 @@ int main(int argc,char *argv[])
 	}
 	comLen++;	// for '\0'
 	combuf = malloc(comLen);
-	if (combuf == NULL){
-		UNLHAputs(noMemMes);
+	if (combuf == NULL) {
+		UNPmaPuts(noMemMes);
 		free(resultbuf);
 		return 1;
 	}
@@ -75,24 +103,25 @@ int main(int argc,char *argv[])
 	}
 
 	/* The code of your application goes here */
-    /* Loading UNLHA32.DLL */
-	if((hInstDLL=LoadLibrary("UnPma32.DLL"))==NULL) {
-		UNLHAputs("UnPma32.DLL not found.\n");
+    /* Loading UnPma32.DLL */
+	hInstDLL = LoadLibrary("UnPma32.DLL");
+	if(hInstDLL == NULL) {
+		UNPmaPuts("UnPma32.DLL not found.\n");
 		free(combuf);
 		free(resultbuf);
 		return 1;
 	}
-	Unlha = (TFUNC)GetProcAddress(hInstDLL,"UnPma");
-	if (Unlha == NULL){
-		UNLHAputs("Can't get function address.\n");
+	Unpma = (TFUNC)GetProcAddress(hInstDLL, "UnPma");
+	if (Unpma == NULL) {
+		UNPmaPuts("Can't get function address.\n");
 		free(combuf);
 		free(resultbuf);
 		return 1;
 	}
-	result = Unlha(NULL,combuf,resultbuf,RBUFSIZE);
+	result = Unpma(NULL, combuf, resultbuf, RBUFSIZE);
 	FreeLibrary(hInstDLL);
 
-	UNLHAputs(resultbuf);
+	UNPmaPuts(resultbuf);
 
 	free(combuf);
 	free(resultbuf);
